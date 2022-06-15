@@ -3,10 +3,7 @@
     <v-card class="pa-5">
       <v-card-title>
         <v-row class="justify-space-between">
-          <span>ຂໍ້ມູນບັດ({{ scores.length||0 }})</span>
-          <v-btn  @click="newAction"
-            ><v-icon>mdi-plus-circle</v-icon>ເພີ່ມໃໝ່</v-btn
-          >
+          <span>ຂໍ້ມູນບັດ({{ scoresNull.length||0 }})</span>
         </v-row>
       </v-card-title>
       <v-row class="justify-end">
@@ -29,7 +26,7 @@
         <v-data-table
           :search="search"
           :headers="headers"
-          :items="scores"
+          :items="scoresNull"
           :footer-props="{ itemsPerPageText: 'ໜ້າທີ :' }"
           pagination.sync="pagination"
           item-key="idx"
@@ -37,11 +34,8 @@
         >
           <template v-slot:[`item.actions`]="{ item }">
             <v-row class="justify-start">
-              <v-icon @click="updateAction(item)" class="mr-2" color="update">
-                mdi-pencil
-              </v-icon>
-              <v-icon @click="deleteAction(item)" class="mr-2" color="delete">
-                mdi-delete
+              <v-icon @click="checkAction(item)" class="mr-2" >
+                mdi-check-underline
               </v-icon>
             </v-row>
           </template>
@@ -58,7 +52,7 @@ export default {
   data: () => ({
     search: "",
     loading: true,
-    deleteItem: null,
+    cfItem: null,
     headers: [
       {
         text: "ລຳດັບ",
@@ -83,14 +77,6 @@ export default {
         value: "addDate",
       },
       {
-        text: "ຜູໃຊ້",
-        value: "user",
-      },
-      {
-        text: "ວັນທີສີ້ນສຸດ",
-        value: "endDate",
-      },
-      {
         text: "Actions",
         value: "actions",
         sortable: false,
@@ -100,15 +86,15 @@ export default {
 
   computed: {
     ...mapGetters({
-      delAlert: "stateMod/delAlert",
+      confirmAlert: "stateMod/confirmAlert",
       toastError: "stateMod/toastError",
       toastDeleteSuccess: "stateMod/toastDeleteSuccess",
-      scores: "scoreMod/scores",
+      scoresNull: "scoreMod/scoresNull",
       length: "scoreMod/length",
     }),
   },
   watch: {
-    scores(val) {
+    scoresNull(val) {
       if (val.length > 0 || this.length == false) {
         this.loading = false;
       }
@@ -121,19 +107,19 @@ export default {
     },
   },
   mounted() {
-    this.getScores();
+    this.getScoresNull();
     this.Loading();
   },
   methods: {
     ...mapActions("scoreMod", [
-      "getScores",
-      "delScore",
+      "getScoresNull",
+      "putScore",
     ]),
     ...mapActions("stateMod", ["Toast"]),
     Alert() {
-      this.$swal(this.delAlert).then((result) => {
+      this.$swal(this.confirmAlert).then((result) => {
         if (result.isConfirmed) {
-          this.deleteConfirm();
+          this.confirm();
         }
       });
     },
@@ -147,20 +133,17 @@ export default {
         this.loading = false;
       }
     },
-    newAction() {
-      this.$router.push(`/score/add`);
-    },
-    deleteAction(item) {
-      this.deleteItem = item;
+    checkAction(item) {
+      this.cfItem = item;
       this.Alert();
     },
-    deleteConfirm() {
+    confirm() {
       try {
-        this.delScore(this.deleteItem)
+        this.putScore(this.cfItem)
           .then((res) => {
             if (res.status == 201) {
               this.$swal(this.toastDeleteSuccess);
-              this.getScores();
+              this.getScoresNull();
             } else {
               this.$swal(this.toastError);
             }

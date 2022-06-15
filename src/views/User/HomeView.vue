@@ -1,16 +1,13 @@
 <template>
   <v-app class="home">
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center" @click="$router.push(`/home`)">
+      <div class="d-flex align-center" @click="$router.push(`/user`)">
         Tplus website
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn to="/auth" text>
-        <span class="mr-2">auths</span>
-      </v-btn>
-      <v-btn to="/score" text>
+      <v-btn to="/user/score" text>
         <span class="mr-2">Score</span>
       </v-btn>
       <v-spacer></v-spacer>

@@ -26,10 +26,43 @@ const routes = [
         component: () => import('../views/AuthView.vue')
       },
       {
+        path: '/auth/add',
+        name: 'authAdd',
+        component: () => import('../views/AuthAdd.vue')
+      },
+      {
+        path: '/auth/edit/:id',
+        name: 'authEdit',
+        component: () => import('../views/AuthEdit.vue')
+      },
+      {
         path: '/score',
         name: 'score',
         component: () => import('../views/ScoreView.vue')
+      },
+      {
+        path: '/score/add',
+        name: 'scoreAdd',
+        component: () => import('../views/ScoreAdd.vue')
       }
+    ]
+  },
+  
+  {
+    path: '/user',
+    name: 'home',
+    component: () => import('../views/User/HomeView.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'dash',
+        component: () => import('../views/User/DashView.vue')
+      },
+      {
+        path: '/user/score',
+        name: 'score',
+        component: () => import('../views/User/ScoreView.vue')
+      },
     ]
   },
   {

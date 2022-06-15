@@ -1,7 +1,6 @@
 <template>
   <v-app class="app">
     <v-main>
-      <div>
         <v-row no-gutters class="justify-center">
           <v-col cols="12" md="10" lg="8">
             <v-card flat tile class="ma-2 ma-md-6 pa-2 pa-md-16">
@@ -59,7 +58,6 @@
             </v-card>
           </v-col>
         </v-row>
-      </div>
     </v-main>
   </v-app>
 </template>
@@ -123,15 +121,14 @@ export default {
             if (res.data.token) {
               window.localStorage.removeItem("token");
               this.setToken(res.data.token);
-              window.localStorage.setItem(
-                "admin",
-                JSON.stringify(res.data.admin)
-              );
               window.localStorage.setItem("token", res.data.token);
               console.log(window.localStorage.getItem("token"));
               if (res.data.result.role == "admin") {
                 this.$router.push(`/home`);
-                this.$router.go();
+                // this.$router.go();
+              } else if (res.data.result.role == "user") {
+                this.$router.push(`/user`);
+                // this.$router.go();
               } 
               this.toast(
                 "success",
