@@ -1,7 +1,7 @@
 <template>
   <v-app id="home" style="fontfamily:">
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center" @click="$router.push(`/home`)">
+      <div class="d-flex align-center" @click="homePage">
         Tplus website
       </div>
 
@@ -13,7 +13,7 @@
         <span class="mr-2">ສັ່ງຊື້</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn to="/" icon>
+      <v-btn @click="logout" icon>
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
@@ -24,7 +24,15 @@
 
 <script>
 export default {
-  components: {},
+  methods:{
+    logout(){
+      this.$router.push(`/`)
+      localStorage.clear()
+    },
+    homePage(){
+      this.$router.push(`/home`)
+    }
+  }
 };
 </script>
 <style lang="css">

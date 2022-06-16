@@ -12,8 +12,14 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'home',
+    name: 'homepage',
     component: HomeView,
+    beforeEnter: (to, from, next) => {
+      var token = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : null
+      if (token != null && token != undefined) next()
+      else next({ path: '/' })
+    },
+
     children: [
       {
         path: '/',
@@ -52,6 +58,11 @@ const routes = [
     path: '/user',
     name: 'home',
     component: () => import('../views/User/HomeView.vue'),
+    beforeEnter: (to, from, next) => {
+      var token = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : null
+      if (token != null && token != undefined) next()
+      else next({ path: '/' })
+    },
     children: [
       {
         path: '/',

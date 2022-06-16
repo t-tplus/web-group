@@ -14,7 +14,7 @@
         <span class="mr-2">ສັ່ງຊື້ໃໝ່</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn to="/" icon>
+      <v-btn @click="logout" icon>
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
@@ -26,6 +26,13 @@
 <script>
 export default {
   components: {},
+  
+  methods:{
+    logout(){
+      this.$router.push(`/`)
+      localStorage.clear()
+    }
+  }
 };
 </script>
 <style >

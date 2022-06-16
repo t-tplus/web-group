@@ -14,7 +14,6 @@
           :footer-props="{ itemsPerPageText: 'ໜ້າທີ :' }"
           pagination.sync="pagination"
           item-key="idx"
-          @dblclick:row="viewAction"
         >
         </v-data-table>
       </div>
@@ -88,8 +87,7 @@ export default {
   },
   methods: {
     ...mapActions("scoreMod", [
-      "getScoresAuth",
-      "delScore",
+      "getScoresAuth"
     ]),
     Loading() {
       if (this.length == false) {
