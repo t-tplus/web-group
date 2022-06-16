@@ -1,5 +1,5 @@
 <template>
-  <v-app class="app">
+  <v-app id="app">
     <v-main>
       <router-view/>
     </v-main>
@@ -16,8 +16,15 @@ export default {
   }),
 };
 </script>
-<style >
-.app{
-  font-family: 'Noto Sans Lao';
+<style  lang="css">
+@font-face {
+  font-size: 1.8rem;
+  font-family: "NotoSansLao";
+  src: local("NotoSansLao"),
+    url(./assets/NotoSansLao-Regular.ttf) format("truetype");
 }
-</style>
+.description {
+  font-family: "NotoSansLao";
+  font-size: 1rem;
+}
+  </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-app class="home">
+  <v-app id="home" style="fontfamily:">
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center" @click="$router.push(`/home`)">
         Tplus website
@@ -28,8 +28,28 @@ export default {
   components: {},
 };
 </script>
-<style >
-.home{
-  font-family: 'Noto Sans Lao';
+<style lang="css">
+#home{
+  font-family: "NotoSansLao";
 }
+
+.v-dialog {
+  font-family: "NotoSansLao";
+}
+.v-avatar {
+  font-family: "NotoSansLao";
+}
+.v-text-field label {
+  font-size: 1rem;
+}
+.v-data-table th {
+  font-size: 14px !important;
+  text-shadow: none !important;
+  font-family: "NotoSansLao";
+}
+.v-data-table td {
+  font-size: 12px !important;
+  font-family: "NotoSansLao";
+}
+
 </style>

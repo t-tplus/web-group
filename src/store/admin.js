@@ -117,7 +117,6 @@ const adminModule = {
       try {
         return axios
           .delete(apiURL + `auths/${item._id}`, { headers: adminHeader })
-
       } catch (e) {
         console.log(e);
       }

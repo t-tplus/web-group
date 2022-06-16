@@ -8,7 +8,7 @@ useFrameWork(Vue)
 setComponents(Vue)
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 new Vue({
   router,
