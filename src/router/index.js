@@ -47,6 +47,16 @@ const routes = [
         component: () => import('../views/ScoreView.vue')
       },
       {
+        path: '/score/all',
+        name: 'scoreAll',
+        component: () => import('../views/ScoreViewAll.vue')
+      },
+      {
+        path: '/score/null',
+        name: 'scoreNull',
+        component: () => import('../views/ScoreViewNull.vue')
+      },
+      {
         path: '/score/add',
         name: 'scoreAdd',
         component: () => import('../views/ScoreAdd.vue')

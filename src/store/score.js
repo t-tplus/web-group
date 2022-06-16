@@ -8,6 +8,7 @@ const scoreModule = {
   namespaced: true,
   state: {
     scores: [],
+    scoresSuccess: [],
     scoresNull: [],
     scoresAuth: [],
     scoresUser: [],
@@ -17,6 +18,9 @@ const scoreModule = {
   mutations: {
     setScores(state, score) {
       state.scores = score;
+    },
+    setScoresSuccess(state, score) {
+      state.scoresSuccess = score;
     },
     setScoresNull(state, score) {
       state.scoresNull = score;
@@ -119,6 +123,56 @@ const scoreModule = {
             }
           }
           context.commit("setScoresNull", scorelist);
+          context.commit("setLength", true);
+        }).catch((error) => {
+          context.commit("setLength", false);
+          console.log(error)
+        });
+      } catch (error) {
+        context.commit("setLength", false);
+        console.log(error);
+      }
+    },
+    
+    getScoresSuccess(context) {
+      try {
+        axios.get(apiURL + `scores`, { headers: adminHeader }).then((res) => {
+          var scorelist = []
+          if (res.data.error != undefined) {
+            context.commit("setScoresSuccess", scorelist);
+            context.commit("setLength", false);
+            return
+          }
+          if (res.data.length < 1) {
+            context.commit("setScoresSuccess", scorelist);
+            context.commit("setLength", false);
+            return
+          }
+          var index=0
+          for (const idx in res.data) {
+            const el = res.data[idx];
+            if(el.user){
+              index+=1
+              var score = {
+                idx: index,
+                _id: el._id,
+                admin: el.admin ? el.admin.userName : null,
+                user: el.user ? el.user.userName : null,
+                tel: el.tel,
+                account: el.account,
+                addDate:
+                  moment(String(el.addDate)).format("DD-MM-YYYY"),
+                endDate: el.endDate ?
+                  moment(String(el.endDate)).format("DD-MM-YYYY") : null,
+                createdAt:
+                  moment(String(el.createdAt)).format("DD-MM-YYYY"),
+                updatedAt:
+                  moment(String(el.updatedAt)).format("DD-MM-YYYY"),
+              };
+              scorelist.push(score);
+            }
+          }
+          context.commit("setScoresSuccess", scorelist);
           context.commit("setLength", true);
         }).catch((error) => {
           context.commit("setLength", false);
@@ -284,6 +338,7 @@ const scoreModule = {
 
   getters: {
     scores: (state) => state.scores,
+    scoresSuccess: (state) => state.scoresSuccess,
     scoresNull: (state) => state.scoresNull,
     scoresAuth: (state) => state.scoresAuth,
     scoresUser: (state) => state.scoresUser,

@@ -9,8 +9,17 @@
       <v-btn to="/auth" text>
         <span class="mr-2">ຜູ້ໃຊ້</span>
       </v-btn>
+      <v-btn to="/score/all" text>
+        <span class="mr-2">ສັ່ງຊື້ທັງໝົດ</span>
+      </v-btn>
+      <v-btn to="/home" text>
+        <span class="mr-2">ສັ່ງຊື້ຂອງເຮົາ</span>
+      </v-btn>
       <v-btn to="/score" text>
-        <span class="mr-2">ສັ່ງຊື້</span>
+        <span class="mr-2">ໄດ້ຮັບຢືນຢັນ</span>
+      </v-btn>
+      <v-btn to="/score/null" text>
+        <span class="mr-2">ສັ່ງຊື້ໃໝ່</span>
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn @click="logout" icon>

@@ -3,7 +3,7 @@
     <v-card class="pa-5">
       <v-card-title>
         <v-row class="justify-space-between">
-          <span>ຂໍ້ມູນສັ່ງຊື້({{ scoresSuccess.length||0 }})</span>
+          <span>ຂໍ້ມູນສັ່ງຊື້({{ scoresNull.length||0 }})</span>
           <v-btn  @click="newAction"
             ><v-icon>mdi-plus-circle</v-icon>ເພີ່ມໃໝ່</v-btn
           >
@@ -29,7 +29,7 @@
         <v-data-table
           :search="search"
           :headers="headers"
-          :items="scoresSuccess"
+          :items="scoresNull"
           :footer-props="{ itemsPerPageText: 'ໜ້າທີ :' }"
           pagination.sync="pagination"
           item-key="idx"
@@ -82,14 +82,6 @@ export default {
         value: "addDate",
       },
       {
-        text: "ຜູ້ຢືນຢັນ",
-        value: "user",
-      },
-      {
-        text: "ວັນທີ່ຢືນຢັນ",
-        value: "endDate",
-      },
-      {
         text: "Actions",
         value: "actions",
         sortable: false,
@@ -102,12 +94,12 @@ export default {
       delAlert: "stateMod/delAlert",
       toastError: "stateMod/toastError",
       toastDeleteSuccess: "stateMod/toastDeleteSuccess",
-      scoresSuccess: "scoreMod/scoresSuccess",
+      scoresNull: "scoreMod/scoresNull",
       length: "scoreMod/length",
     }),
   },
   watch: {
-    scoresSuccess(val) {
+    scoresNull(val) {
       if (val.length > 0 || this.length == false) {
         this.loading = false;
       }
@@ -120,12 +112,12 @@ export default {
     },
   },
   mounted() {
-    this.getScoresSuccess();
+    this.getScoresNull();
     this.Loading();
   },
   methods: {
     ...mapActions("scoreMod", [
-      "getScoresSuccess",
+      "getScoresNull",
       "delScore",
     ]),
     ...mapActions("stateMod", ["Toast"]),
@@ -159,7 +151,7 @@ export default {
           .then((res) => {
             if (res.status == 201) {
               this.$swal(this.toastDeleteSuccess);
-              this.getScoresSuccess();
+              this.getScoresNull();
             } else {
               this.$swal(this.toastError);
             }

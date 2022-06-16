@@ -3,7 +3,7 @@
     <v-card class="pa-5">
       <v-card-title>
         <v-row class="justify-space-between">
-          <span>ຂໍ້ມູນສັ່ງຊື້({{ scoresSuccess.length||0 }})</span>
+          <span>ຂໍ້ມູນສັ່ງຊື້({{ scores.length||0 }})</span>
           <v-btn  @click="newAction"
             ><v-icon>mdi-plus-circle</v-icon>ເພີ່ມໃໝ່</v-btn
           >
@@ -29,7 +29,7 @@
         <v-data-table
           :search="search"
           :headers="headers"
-          :items="scoresSuccess"
+          :items="scores"
           :footer-props="{ itemsPerPageText: 'ໜ້າທີ :' }"
           pagination.sync="pagination"
           item-key="idx"
@@ -102,12 +102,12 @@ export default {
       delAlert: "stateMod/delAlert",
       toastError: "stateMod/toastError",
       toastDeleteSuccess: "stateMod/toastDeleteSuccess",
-      scoresSuccess: "scoreMod/scoresSuccess",
+      scores: "scoreMod/scores",
       length: "scoreMod/length",
     }),
   },
   watch: {
-    scoresSuccess(val) {
+    scores(val) {
       if (val.length > 0 || this.length == false) {
         this.loading = false;
       }
@@ -120,12 +120,12 @@ export default {
     },
   },
   mounted() {
-    this.getScoresSuccess();
+    this.getScores();
     this.Loading();
   },
   methods: {
     ...mapActions("scoreMod", [
-      "getScoresSuccess",
+      "getScores",
       "delScore",
     ]),
     ...mapActions("stateMod", ["Toast"]),
@@ -159,7 +159,7 @@ export default {
           .then((res) => {
             if (res.status == 201) {
               this.$swal(this.toastDeleteSuccess);
-              this.getScoresSuccess();
+              this.getScores();
             } else {
               this.$swal(this.toastError);
             }
