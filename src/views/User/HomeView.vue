@@ -7,8 +7,11 @@
 
       <v-spacer></v-spacer>
 
+      <v-btn to="/user/score/old" text>
+        <span class="mr-2">ປະຫວັດຜ່ານມາ</span>
+      </v-btn>
       <v-btn to="/user/score" text>
-        <span class="mr-2">Score</span>
+        <span class="mr-2">ສັ່ງຊື້ໃໝ່</span>
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn to="/" icon>

@@ -63,6 +63,11 @@ const routes = [
         name: 'score',
         component: () => import('../views/User/ScoreView.vue')
       },
+      {
+        path: '/user/score/old',
+        name: 'DashView',
+        component: () => import('../views/User/DashView.vue')
+      },
     ]
   },
   {

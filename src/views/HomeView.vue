@@ -6,12 +6,11 @@
       </div>
 
       <v-spacer></v-spacer>
-
       <v-btn to="/auth" text>
-        <span class="mr-2">auths</span>
+        <span class="mr-2">ຜູ້ໃຊ້</span>
       </v-btn>
       <v-btn to="/score" text>
-        <span class="mr-2">Score</span>
+        <span class="mr-2">ສັ່ງຊື້</span>
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn to="/" icon>

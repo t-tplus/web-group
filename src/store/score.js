@@ -9,6 +9,8 @@ const scoreModule = {
   state: {
     scores: [],
     scoresNull: [],
+    scoresAuth: [],
+    scoresUser: [],
     score: [],
     length: true
   },
@@ -18,6 +20,12 @@ const scoreModule = {
     },
     setScoresNull(state, score) {
       state.scoresNull = score;
+    },
+    setScoresAuth(state, score) {
+      state.scoresAuth = score;
+    },
+    setScoresUser(state, score) {
+      state.scoresUser = score;
     },
     setScore(state, score) {
       state.score = score;
@@ -121,6 +129,100 @@ const scoreModule = {
         console.log(error);
       }
     },
+    getScoresAuth(context) {
+      try {
+        axios.get(apiURL + `scores/by/auth`, { headers: adminHeader }).then((res) => {
+          var scorelist = []
+          if (res.data.error != undefined) {
+            context.commit("setScoresAuth", scorelist);
+            context.commit("setLength", false);
+            return
+          }
+          if (res.data.length < 1) {
+            context.commit("setScoresAuth", scorelist);
+            context.commit("setLength", false);
+            return
+          }
+          var index=0
+          for (const idx in res.data) {
+            const el = res.data[idx];
+              index+=1
+              var score = {
+                idx: index,
+                _id: el._id,
+                admin: el.admin ? el.admin.userName : null,
+                user: el.user ? el.user.userName : null,
+                tel: el.tel,
+                account: el.account,
+                addDate:
+                  moment(String(el.addDate)).format("DD-MM-YYYY"),
+                endDate: el.endDate ?
+                  moment(String(el.endDate)).format("DD-MM-YYYY") : null,
+                createdAt:
+                  moment(String(el.createdAt)).format("DD-MM-YYYY"),
+                updatedAt:
+                  moment(String(el.updatedAt)).format("DD-MM-YYYY"),
+              };
+              scorelist.push(score);
+            }
+          context.commit("setScoresAuth", scorelist);
+          context.commit("setLength", true);
+        }).catch((error) => {
+          context.commit("setLength", false);
+          console.log(error)
+        });
+      } catch (error) {
+        context.commit("setLength", false);
+        console.log(error);
+      }
+    },
+    getScoresUser(context) {
+      try {
+        axios.get(apiURL + `scores/by/user`, { headers: adminHeader }).then((res) => {
+          var scorelist = []
+          if (res.data.error != undefined) {
+            context.commit("setScoresUser", scorelist);
+            context.commit("setLength", false);
+            return
+          }
+          if (res.data.length < 1) {
+            context.commit("setScoresUser", scorelist);
+            context.commit("setLength", false);
+            return
+          }
+          var index=0
+          for (const idx in res.data) {
+            const el = res.data[idx];
+              index+=1
+              var score = {
+                idx: index,
+                _id: el._id,
+                admin: el.admin ? el.admin.userName : null,
+                user: el.user ? el.user.userName : null,
+                tel: el.tel,
+                account: el.account,
+                addDate:
+                  moment(String(el.addDate)).format("DD-MM-YYYY"),
+                endDate: el.endDate ?
+                  moment(String(el.endDate)).format("DD-MM-YYYY") : null,
+                createdAt:
+                  moment(String(el.createdAt)).format("DD-MM-YYYY"),
+                updatedAt:
+                  moment(String(el.updatedAt)).format("DD-MM-YYYY"),
+              };
+              scorelist.push(score);
+          }
+          context.commit("setScoresUser", scorelist);
+          context.commit("setLength", true);
+        }).catch((error) => {
+          context.commit("setLength", false);
+          console.log(error)
+        });
+      } catch (error) {
+        context.commit("setLength", false);
+        console.log(error);
+      }
+    },
     getScore(context, id) {
       try {
         axios
@@ -183,6 +285,8 @@ const scoreModule = {
   getters: {
     scores: (state) => state.scores,
     scoresNull: (state) => state.scoresNull,
+    scoresAuth: (state) => state.scoresAuth,
+    scoresUser: (state) => state.scoresUser,
     score: (state) => state.score,
     length: (state) => state.length,
   }

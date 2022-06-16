@@ -3,7 +3,7 @@
     <v-card class="pa-5">
       <v-card-title>
         <v-row class="justify-space-between">
-          <span>ຂໍ້ມູນບັດ({{ scoresNull.length||0 }})</span>
+          <span>ຂໍ້ມູນສັ່ງຊື້({{ scoresNull.length||0 }})</span>
         </v-row>
       </v-card-title>
       <v-row class="justify-end">
@@ -61,19 +61,19 @@ export default {
         value: "idx",
       },
       {
-        text: "ບັນຊີ",
-        value: "account",
-      },
-      {
-        text: "ເບີ້ໂທ",
+        text: "ເບີໂທ",
         value: "tel",
       },
       {
-        text: "ແອດມີນ",
+        text: "ເລກຊີມ",
+        value: "account",
+      },
+      {
+        text: "ຜູ້ສັ່ງຊື້",
         value: "admin",
       },
       {
-        text: "ວັນທີ່ລົງທະບຽນ",
+        text: "ວັນທີ່ສັ່ງຊື້",
         value: "addDate",
       },
       {

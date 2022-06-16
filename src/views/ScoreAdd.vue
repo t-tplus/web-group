@@ -9,29 +9,29 @@
           <v-card flat tile class="my-2 my-md-10 py-2 px-0 px-md-5">
             <v-row no-gutters class="justify-center"
               ><span style="font-size: 1.2rem; color: black" class="ml-2">
-                ຂໍ້ມູນບັດ
+                ຂໍ້ມູນສັ່ງຊື້
               </span>
               <v-icon>mdi-chevron-double-right</v-icon>
-              <span style="color: blue; font-size: 1.2rem">ເພີ່ມບັດ</span>
+              <span style="color: blue; font-size: 1.2rem">ເພີ່ມສັ່ງຊື້</span>
             </v-row>
             <v-row no-gutters class="justify-center mt-5">
               <v-col cols="12" md="7" class="px-2">
-                <p>ບັນຊີ<span>*</span></p>
-                <v-text-field
-                  outlined
-                  dense
-                  required
-                  v-model="score.account"
-                  :rules="[rules.account.required]"
-                  type="number"
-                ></v-text-field>
-                 <p>ເບີ້ໂທ<span>*</span></p>
+                <p>ເບີໂທ<span>*</span></p>
                 <v-text-field
                   outlined
                   dense
                   required
                   v-model="score.tel"
                   :rules="[rules.tel.required]"
+                  type="number"
+                ></v-text-field>
+                 <p>ເລກຊີມ<span>*</span></p>
+                <v-text-field
+                  outlined
+                  dense
+                  required
+                  v-model="score.account"
+                  :rules="[rules.account.required]"
                   type="number"
                 ></v-text-field>
                 <v-row no-gutters class="mx-2 justify-center">
@@ -70,10 +70,10 @@ export default {
     },
     rules: {
       account: {
-        required: (value) => !!value || "ກະລຸນາປ້ອນເບີໂທ",
+        required: (value) => !!value || "ກະລຸນາປ້ອນເລກຊີມ",
       },
       tel: {
-        required: (value) => !!value || "ກະລຸນາປ້ອນບັນຊີ",
+        required: (value) => !!value || "ກະລຸນາປ້ອນເບີໂທ",
       },
     },
   }),
@@ -108,7 +108,7 @@ export default {
         ) {
           this.toast(
             "warning",
-            `<div style='font-family:"Noto Sans Lao";color:red' >ກະລຸນາປ້ອນບັນຊີ</div>`
+            `<div style='font-family:"Noto Sans Lao";color:red' >ກະລຸນາປ້ອນເລກຊີມ</div>`
           );
           return;
         }
