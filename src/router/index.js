@@ -19,17 +19,16 @@ const routes = [
       if (token != null && token != undefined) next()
       else next({ path: '/' })
     },
-
     children: [
       {
         path: '/',
         name: 'dash',
-        component: () => import('../views/DashView.vue')
+        component: () => import('../views/DashView.vue'),
       },
       {
         path: '/auth',
         name: 'auth',
-        component: () => import('../views/AuthView.vue')
+        component: () => import('../views/AuthView.vue'),
       },
       {
         path: '/auth/add',

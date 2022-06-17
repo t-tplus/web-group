@@ -3,7 +3,7 @@
     <v-card class="pa-5">
       <v-card-title>
         <v-row class="justify-space-between">
-          <span>ຂໍ້ມູນສັ່ງຊື້ຂອງເຮົາ({{ scoresAuth.length||0 }})</span>
+          <span>ຂໍ້ມູນສັ່ງຊື້ຂອງເຮົາ({{ scoresAuth.length || 0 }})</span>
         </v-row>
       </v-card-title>
       <div>
@@ -86,11 +86,10 @@ export default {
     this.Loading();
   },
   methods: {
-    ...mapActions("scoreMod", [
-      "getScoresAuth"
-    ]),
+    ...mapActions("scoreMod", ["getScoresAuth"]),
     Loading() {
       if (this.length == false) {
+        window.location.reload();
         this.loading = false;
       }
     },

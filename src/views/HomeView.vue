@@ -12,9 +12,6 @@
       <v-btn to="/score/all" text>
         <span class="mr-2">ສັ່ງຊື້ທັງໝົດ</span>
       </v-btn>
-      <v-btn to="/home" text>
-        <span class="mr-2">ສັ່ງຊື້ຂອງເຮົາ</span>
-      </v-btn>
       <v-btn to="/score" text>
         <span class="mr-2">ໄດ້ຮັບຢືນຢັນ</span>
       </v-btn>

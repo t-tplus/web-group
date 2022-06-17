@@ -124,11 +124,9 @@ export default {
               window.localStorage.setItem("token", res.data.token);
               console.log(window.localStorage.getItem("token"));
               if (res.data.result.role == "admin") {
-                this.$router.push("/home");
-                // this.$router.go();
+                window.location.replace("/home")
               } else if (res.data.result.role == "user") {
-                this.$router.push("/user");
-                // this.$router.go();
+                window.location.replace("/user")
               } 
               this.toast(
                 "success",
